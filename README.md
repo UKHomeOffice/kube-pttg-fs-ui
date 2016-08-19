@@ -1,2 +1,2 @@
-# kube-pttg-fss-ui
+# kube-pttg-fs-ui
 Finanical Status service UI
