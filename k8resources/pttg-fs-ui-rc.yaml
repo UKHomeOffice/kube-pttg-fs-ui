@@ -124,7 +124,7 @@ spec:
         image: quay.io/ukhomeofficedigital/pttg-fs-ui:${pt-income-version}
         env:
           - name: API_ROOT
-            value: "http://pttg-ip-api.pt-i-dev.svc.cluster.local"
+            value: "http://pttg-fs-api.pt-i-dev.svc.cluster.local"
         resources:
           limits:
             cpu: 200m
