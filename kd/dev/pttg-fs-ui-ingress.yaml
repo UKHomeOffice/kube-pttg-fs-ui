@@ -1,0 +1,29 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    ingress.kubernetes.io/secure-backends: "true"
+  name: pttg-fs-ui
+spec:
+  rules:
+  - host: pttg-fs-ui-dev.notprod.homeoffice.gov.uk
+    http:
+      paths:
+      - backend:
+          serviceName: pttg-fs-ui
+          servicePort: 443
+        path: /
+  - host: www.pttg-fs-ui-dev.notprod.homeoffice.gov.uk
+    http:
+      paths:
+      - backend:
+          serviceName: pttg-fs-ui
+          servicePort: 443
+        path: /
+  tls:
+  - hosts:
+    - pttg-fs-ui-dev.notprod.homeoffice.gov.uk
+    - www.pttg-fs-ui-dev.notprod.homeoffice.gov.uk
+    secretName: letsencrypt-tls
