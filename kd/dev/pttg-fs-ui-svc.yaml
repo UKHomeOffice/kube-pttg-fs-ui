@@ -6,11 +6,9 @@ metadata:
     name: pttg-fs-ui
   name: pttg-fs-ui
 spec:
-  type: NodePort
   ports:
   - name: https
     port: 443
     targetPort: https
-    nodePort: ${pttg_fs_ui_port}
   selector:
     name: pttg-fs-ui
