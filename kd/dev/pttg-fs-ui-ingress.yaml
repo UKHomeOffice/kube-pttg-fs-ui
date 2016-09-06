@@ -26,4 +26,4 @@ spec:
   - hosts:
     - pttg-fs-ui-dev.notprod.homeoffice.gov.uk
     - www.pttg-fs-ui-dev.notprod.homeoffice.gov.uk
-    secretName: letsencrypt-tls
+    secretName: letsencrypt-pttg-fs-ui
