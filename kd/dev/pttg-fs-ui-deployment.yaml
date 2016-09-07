@@ -69,7 +69,7 @@ spec:
           - name: PROXY_SERVICE_HOST
             value: '127.0.0.1'
           - name: PROXY_SERVICE_PORT
-            value: '8001'
+            value: '8000'
           - name: NAXSI_USE_DEFAULT_RULES
             value: 'FALSE'
           - name: ENABLE_UUID_PARAM
@@ -123,6 +123,8 @@ spec:
         env:
           - name: API_ROOT
             value: "http://pttg-fs-api.pt-i-dev.svc.cluster.local"
+          - name: SERVER_PORT
+            value: 8000
         resources:
           limits:
             cpu: 200m
@@ -132,7 +134,7 @@ spec:
             memory: 1024Mi
         ports:
           - name: http
-            containerPort: 8001
+            containerPort: 8000
         imagePullPolicy: Always
         volumeMounts:
           - mountPath: /data
