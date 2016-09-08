@@ -124,7 +124,7 @@ spec:
           - name: API_ROOT
             value: "http://pttg-fs-api.pt-i-dev.svc.cluster.local"
           - name: SERVER_PORT
-            value: 8000
+            value: '8000'
         resources:
           limits:
             cpu: 200m
