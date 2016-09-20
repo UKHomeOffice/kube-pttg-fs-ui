@@ -125,6 +125,8 @@ spec:
             value: "http://pttg-fs-api.pt-i-{{.ENVIRONMENT}}.svc.cluster.local"
           - name: SERVER_PORT
             value: '8000'
+          - name: JAVA_OPTS
+            value: "-Xms512m -Xmx768m"
         resources:
           limits:
             cpu: 200m
