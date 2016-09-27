@@ -140,7 +140,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /healthz
-            port: http
+            port: https
             httpHeaders:
               - name: X-probe
                 value: kubelet
