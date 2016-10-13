@@ -72,6 +72,34 @@ spec:
             containerPort: 443
           - name: http
             containerPort: 80
+      - name: keycloak-proxy
+        image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v1.2.7
+        args:
+          - --config=/etc/secrets/keycloak-api-secrets.yaml
+          - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/${keycloak_realm_name}
+          - --client-id=${ keycloak_clientid }
+          - --listen=0.0.0.0:8081
+          - --log-requests=true
+          - --json-logging=true
+          - --upstream-url=http://127.0.0.1:8081
+          - --no-redirects=false
+          - --redirection-url=https://${pttg_public_dns}
+          - --revocation-url=https://sso.digital.homeoffice.gov.uk/auth/realms/${keycloak_realm_name}/protocol/openid-connect/logout
+          - --cors-origins='*'
+          - --resource='uri=/management|white-listed=true'
+          - --resource=uri=/
+        imagePullPolicy: Always
+        ports:
+          - name: keycloak-http
+            containerPort: 9000
+        volumeMounts:
+        - name: keycloak-api-secret
+          mountPath: /etc/secrets
+          readOnly: true
+        resources:
+          limits:
+            memory: 256Mi
+            cpu: 200m
       - name: vaultjks
         image: quay.io/ukhomeofficedigital/vaultjks:v0.1.0
         imagePullPolicy: Always
@@ -104,6 +132,10 @@ spec:
       - name: pttg-fs-ui
         image: quay.io/ukhomeofficedigital/pttg-fs-ui:{{.VERSION}}
         env:
+          - name: KC_ENABLED
+            value: "true"
+          - name: KC_AUTH_SERVER_URL
+            value: "https://sso.digital.homeoffice.gov.uk/auth"
           - name: API_ROOT
             value: "https://pttg-fs-api.pt-i-{{.ENVIRONMENT}}.svc.cluster.local"
           - name: SERVER_PORT
