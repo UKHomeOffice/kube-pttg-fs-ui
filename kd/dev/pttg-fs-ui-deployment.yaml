@@ -76,17 +76,17 @@ spec:
         image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v1.2.7
         args:
           - --config=/etc/secrets/keycloak-api-secrets.yaml
-          - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/${keycloak_realm_name}
-          - --client-id=${ keycloak_clientid }
+          - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/pttg-{{.ENVIRONMENT}}
+          - --client-id=fs-ui
           - --listen=0.0.0.0:8081
           - --log-requests=true
           - --json-logging=true
           - --upstream-url=http://127.0.0.1:8081
           - --no-redirects=false
-          - --redirection-url=https://${pttg_public_dns}
-          - --revocation-url=https://sso.digital.homeoffice.gov.uk/auth/realms/${keycloak_realm_name}/protocol/openid-connect/logout
+          - --redirection-url=https://pttg-fs-ui-{{.ENVIRONMENT}}.notprod.homeoffice.gov.uk
+          # - --revocation-url=https://sso.digital.homeoffice.gov.uk/auth/realms/pttg-{{.ENVIRONMENT}}/protocol/openid-connect/logout
           - --cors-origins='*'
-          - --resource='uri=/management|white-listed=true'
+          # - --resource='uri=/management|white-listed=true'
           - --resource=uri=/
         imagePullPolicy: Always
         ports:
