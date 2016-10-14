@@ -91,7 +91,7 @@ spec:
         imagePullPolicy: Always
         ports:
           - name: keycloak-http
-            containerPort: 9000
+            containerPort: 8081
         volumeMounts:
         - name: keycloak-api-secret
           mountPath: /etc/secrets
