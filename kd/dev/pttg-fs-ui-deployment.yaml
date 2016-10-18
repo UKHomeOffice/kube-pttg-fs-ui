@@ -75,7 +75,7 @@ spec:
       - name: keycloak-proxy
         image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v1.2.7
         args:
-          - --config=/etc/secrets/keycloak-api-secret.yaml
+          - --config=/etc/secrets/keycloak-api-secret
           - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/pttg-{{.ENVIRONMENT}}
           - --client-id=financial-services
           - --listen=0.0.0.0:9000
