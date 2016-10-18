@@ -13,7 +13,7 @@ KD_MD5='5bc3501e5e4c10fe0dfd057322215d60'
 KD_DOWLOAD_ADDR="https://github.com/UKHomeOffice/kd/releases/download/${KD_VERSION}/kd_linux_amd64"
 KUBECTL_BINARY='kubectl'
 KUBECTL_VERSION='v1.3.5'
-KUBECTL_MD5='26852c9bd750a2afee527658944397d1'
+KUBECTL_MD5='62a617785952e3ce0664795e1b1b5de6'
 KUBECTL_DOWNLOAD_ADDR="https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl"
 APP='pttg-fs-ui'
 
