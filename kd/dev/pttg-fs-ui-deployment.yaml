@@ -170,3 +170,6 @@ spec:
       - name: javapki
         emptyDir:
           medium: "Memory"
+      - name: keycloak-api-secret
+        secret:
+          secretName: keycloak-api-secret
