@@ -99,7 +99,7 @@ spec:
         resources:
           limits:
             memory: 256Mi
-            cpu: 200m
+            cpu: 100m
       - name: vaultjks
         image: quay.io/ukhomeofficedigital/vaultjks:v0.1.0
         imagePullPolicy: Always
