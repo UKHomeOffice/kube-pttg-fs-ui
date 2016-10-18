@@ -132,10 +132,6 @@ spec:
       - name: pttg-fs-ui
         image: quay.io/ukhomeofficedigital/pttg-fs-ui:{{.VERSION}}
         env:
-          - name: KC_ENABLED
-            value: "false"
-          - name: KC_AUTH_SERVER_URL
-            value: "https://sso.digital.homeoffice.gov.uk/auth"
           - name: API_ROOT
             value: "https://pttg-fs-api.pt-i-{{.ENVIRONMENT}}.svc.cluster.local"
           - name: SERVER_PORT
