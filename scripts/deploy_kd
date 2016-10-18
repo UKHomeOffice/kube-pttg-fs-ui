@@ -8,7 +8,7 @@ set -e
 VERSION=$1
 ENVIRONMENT=$2
 KD_BINARY='kd_linux_amd64'
-KD_VERSION='v0.1.1'
+KD_VERSION='v0.2.2'
 KD_MD5='5bc3501e5e4c10fe0dfd057322215d60'
 KD_DOWLOAD_ADDR="https://github.com/UKHomeOffice/kd/releases/download/${KD_VERSION}/kd_linux_amd64"
 KUBECTL_BINARY='kubectl'
