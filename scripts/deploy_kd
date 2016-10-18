@@ -61,8 +61,8 @@ echo "deploying ..."
 export VERSION
 export ENVIRONMENT
 echo "deploying ingress"
-./kd_linux_amd64 --context=pt-i-dev --namespace=pt-i-${ENVIRONMENT} --file kd/${ENVIRONMENT}/${APP}-ingress.yaml
+./kd_linux_amd64 --debug --context=pt-i-dev --namespace=pt-i-${ENVIRONMENT} --file kd/${ENVIRONMENT}/${APP}-ingress.yaml
 echo "deploying a deployment"
-./kd_linux_amd64 --context=pt-i-dev --namespace=pt-i-${ENVIRONMENT} --file kd/${ENVIRONMENT}/${APP}-deployment.yaml
+./kd_linux_amd64 --debug --context=pt-i-dev --namespace=pt-i-${ENVIRONMENT} --file kd/${ENVIRONMENT}/${APP}-deployment.yaml
 echo "deploying a svc"
-./kd_linux_amd64 --context=pt-i-dev --namespace=pt-i-${ENVIRONMENT} --file kd/${ENVIRONMENT}/${APP}-svc.yaml
+./kd_linux_amd64 --debug --context=pt-i-dev --namespace=pt-i-${ENVIRONMENT} --file kd/${ENVIRONMENT}/${APP}-svc.yaml
