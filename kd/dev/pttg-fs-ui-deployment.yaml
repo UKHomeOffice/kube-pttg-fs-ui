@@ -52,7 +52,7 @@ spec:
           - name: PROXY_SERVICE_HOST
             value: '127.0.0.1'
           - name: PROXY_SERVICE_PORT
-            value: '8000'
+            value: '9000'
           - name: NAXSI_USE_DEFAULT_RULES
             value: 'FALSE'
           - name: ENABLE_UUID_PARAM
@@ -77,21 +77,21 @@ spec:
         args:
           - --config=/etc/secrets/keycloak-api-secrets.yaml
           - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/pttg-{{.ENVIRONMENT}}
-          - --client-id=fs-ui
-          - --listen=0.0.0.0:8081
+          - --client-id=financial-services
+          - --listen=0.0.0.0:9000
           - --log-requests=true
           - --json-logging=true
-          - --upstream-url=http://127.0.0.1:8081
+          - --upstream-url=http://127.0.0.1:8000
           - --no-redirects=false
           - --redirection-url=https://pttg-fs-ui-{{.ENVIRONMENT}}.notprod.homeoffice.gov.uk
-          # - --revocation-url=https://sso.digital.homeoffice.gov.uk/auth/realms/pttg-{{.ENVIRONMENT}}/protocol/openid-connect/logout
           - --cors-origins='*'
-          # - --resource='uri=/management|white-listed=true'
-          - --resource=uri=/
+          - --scope=pttg-user
+          - --resource=uri='/|methods=GET|roles=pttg-user'
+          - --secure-cookie=true
         imagePullPolicy: Always
         ports:
           - name: keycloak-http
-            containerPort: 8081
+            containerPort: 9000
         volumeMounts:
         - name: keycloak-api-secret
           mountPath: /etc/secrets
@@ -133,7 +133,7 @@ spec:
         image: quay.io/ukhomeofficedigital/pttg-fs-ui:{{.VERSION}}
         env:
           - name: KC_ENABLED
-            value: "true"
+            value: "false"
           - name: KC_AUTH_SERVER_URL
             value: "https://sso.digital.homeoffice.gov.uk/auth"
           - name: API_ROOT
