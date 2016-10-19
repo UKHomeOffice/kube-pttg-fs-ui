@@ -46,6 +46,26 @@ spec:
         volumeMounts:
           - mountPath: /etc/nginx/secrets
             name: secrets
+      - name: toolbox
+        image: quay.io/ukhomeofficedigital/toolbox:v0.0.1
+        imagePullPolicy: Always
+        resources:
+         limits:
+          memory: "100Mi"
+          cpu: 100m
+         requests:
+          memory: "50Mi"
+          cpu: 50m
+        command:
+          - sleep
+          - "3600"
+        volumeMounts:
+          - name: secrets
+            mountPath: /etc/nginx/secrets
+            readOnly: true
+          - name: keycloak-api-secret
+            mountPath: /etc/secrets
+            readOnly: true
       - name: proxy
         image: quay.io/ukhomeofficedigital/nginx-proxy:v1.1.5
         env:
@@ -75,19 +95,20 @@ spec:
       - name: keycloak-proxy
         image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v1.2.7
         args:
-          - --config=/etc/secrets/keycloak-api-secret
+          - --config=/etc/secrets/keycloak-api-secret.yaml
           - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/pttg-{{.ENVIRONMENT}}
           - --client-id=financial-services
-          - --listen=0.0.0.0:9000
+          - --listen=127.0.0.1:9000
           - --log-requests=true
           - --json-logging=true
           - --upstream-url=http://127.0.0.1:8000
           - --no-redirects=false
           - --redirection-url=https://pttg-fs-ui-{{.ENVIRONMENT}}.notprod.homeoffice.gov.uk
           - --cors-origins='*'
-          - --scope=pttg-user
-          - --resource=uri='/|methods=GET|roles=pttg-user'
+#          - --scope=pttg-user
+          - --resource=uri='/'
           - --secure-cookie=true
+          - --verbose
         imagePullPolicy: Always
         ports:
           - name: keycloak-http
