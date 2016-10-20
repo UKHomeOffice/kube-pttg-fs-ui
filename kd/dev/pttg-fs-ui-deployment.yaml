@@ -46,26 +46,6 @@ spec:
         volumeMounts:
           - mountPath: /etc/nginx/secrets
             name: secrets
-      - name: toolbox
-        image: quay.io/ukhomeofficedigital/toolbox:v0.0.1
-        imagePullPolicy: Always
-        resources:
-         limits:
-          memory: "100Mi"
-          cpu: 100m
-         requests:
-          memory: "50Mi"
-          cpu: 50m
-        command:
-          - sleep
-          - "3600"
-        volumeMounts:
-          - name: secrets
-            mountPath: /etc/nginx/secrets
-            readOnly: true
-          - name: keycloak-api-secret
-            mountPath: /etc/secrets
-            readOnly: true
       - name: proxy
         image: quay.io/ukhomeofficedigital/nginx-proxy:v1.1.5
         env:
@@ -106,7 +86,7 @@ spec:
           - --redirection-url=https://pttg-fs-ui-{{.ENVIRONMENT}}.notprod.homeoffice.gov.uk
           - --cors-origins='*'
 #          - --scope=pttg-user
-          - --resource=uri='/'
+          - --resource=uri=/|methods=GET|roles=pttg-user
           - --secure-cookie=true
           - --verbose
         imagePullPolicy: Always
