@@ -85,7 +85,7 @@ spec:
           - --no-redirects=false
           - --redirection-url=https://pttg-fs-ui-{{.ENVIRONMENT}}.notprod.homeoffice.gov.uk
           - --cors-origins='*'
-#          - --scope=pttg-user
+          - --resource=uri=/healthz,white-listed=true
           - --resource=uri=/|methods=GET|roles=pttg-user
           - --secure-cookie=true
           - --verbose
