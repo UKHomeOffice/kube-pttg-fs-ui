@@ -47,7 +47,7 @@ spec:
           - mountPath: /etc/nginx/secrets
             name: secrets
       - name: proxy
-        image: quay.io/ukhomeofficedigital/nginx-proxy:v1.1.5
+        image: quay.io/ukhomeofficedigital/nginx-proxy-govuk:v2.1.0.0
         env:
           - name: PROXY_SERVICE_HOST
             value: '127.0.0.1'
