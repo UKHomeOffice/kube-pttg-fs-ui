@@ -8,14 +8,14 @@ metadata:
   name: pttg-fs-ui
 spec:
   rules:
-  - host: pttg-fs-ui-{{.ENVIRONMENT}}.prod.homeoffice.gov.uk
+  - host: pttg-fs-ui-{{.ENVIRONMENT}}.pttg.homeoffice.gov.uk
     http:
       paths:
       - backend:
           serviceName: pttg-fs-ui
           servicePort: 443
         path: /
-  - host: www.pttg-fs-ui-{{.ENVIRONMENT}}.prod.homeoffice.gov.uk
+  - host: www.pttg-fs-ui-{{.ENVIRONMENT}}.pttg.homeoffice.gov.uk
     http:
       paths:
       - backend:
@@ -24,6 +24,6 @@ spec:
         path: /
   tls:
   - hosts:
-    - pttg-fs-ui-{{.ENVIRONMENT}}.prod.homeoffice.gov.uk
-    - www.pttg-fs-ui-{{.ENVIRONMENT}}.prod.homeoffice.gov.uk
+    - pttg-fs-ui-{{.ENVIRONMENT}}.pttg.homeoffice.gov.uk
+    - www.pttg-fs-ui-{{.ENVIRONMENT}}.pttg.homeoffice.gov.uk
     secretName: letsencrypt-pttg-fs-ui
