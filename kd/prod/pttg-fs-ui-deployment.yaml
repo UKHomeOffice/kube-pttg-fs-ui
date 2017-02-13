@@ -77,13 +77,13 @@ spec:
         args:
           - --config=/etc/secrets/keycloak-api-secret.yaml
           - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/pttg-dev
-          - --client-id=pttg-fs-{{.ENVIRONMENT}}
+          - --client-id=pttg-fs-preprod
           - --listen=127.0.0.1:9000
           - --log-requests=true
           - --json-logging=true
           - --upstream-url=http://127.0.0.1:8000
           - --no-redirects=false
-          - --redirection-url=https://pttg-fs-ui-{{.ENVIRONMENT}}.prod.homeoffice.gov.uk
+          - --redirection-url=https://pttg-fs-ui-{{.ENVIRONMENT}}.pttg.homeoffice.gov.uk
           - --cors-origins='*'
           - --resource=uri=/healthz|white-listed=true
           - --resource=uri=/|methods=GET|roles=pttg-user
