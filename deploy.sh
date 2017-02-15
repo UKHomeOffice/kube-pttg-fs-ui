@@ -6,7 +6,8 @@ export KUBE_SERVER=${KUBE_SERVER_DEV}
 export KUBE_TOKEN=${KUBE_TOKEN}
 
 cd kd
-kd --insecure-skip-tls-verify --timeout 5m0s \
+kd --debug \
+   --insecure-skip-tls-verify --timeout 5m0s \
    --file ${ENVIRONMENT}/pttg-fs-ui-deployment.yaml \
    --file ${ENVIRONMENT}/pttg-fs-ui-ingress.yaml \
    --file ${ENVIRONMENT}/pttg-fs-ui-svc.yaml
