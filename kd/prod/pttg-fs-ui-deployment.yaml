@@ -76,8 +76,8 @@ spec:
         image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v1.2.7
         args:
           - --config=/etc/secrets/keycloak-api-secret.yaml
-          - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/pttg-dev
-          - --client-id=pttg-fs-preprod
+          - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/pttg-prod
+          - --client-id=pttg-fs-{{.ENVIRONMENT}}
           - --listen=127.0.0.1:9000
           - --log-requests=true
           - --json-logging=true
