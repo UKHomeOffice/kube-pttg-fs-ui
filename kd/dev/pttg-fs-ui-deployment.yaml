@@ -135,6 +135,8 @@ spec:
       - name: pttg-fs-ui
         image: quay.io/ukhomeofficedigital/pttg-fs-ui:{{.VERSION}}
         env:
+          - name: ENV
+            value: "{{.ENVIRONMENT}}" 
           - name: API_ROOT
             value: "https://pttg-fs-api.pt-i-{{.ENVIRONMENT}}.svc.cluster.local"
           - name: SERVER_PORT
