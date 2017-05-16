@@ -138,7 +138,7 @@ spec:
           - name: ENV
             value: "{{.ENVIRONMENT}}" 
           - name: API_ROOT
-            value: "https://pttg-fs-api"
+            value: "pttg-fs-api:8080"
           - name: SERVER_PORT
             value: '8000'
           - name: JAVA_OPTS
