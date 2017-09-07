@@ -83,10 +83,10 @@ spec:
           - --json-logging=true
           - --upstream-url=http://127.0.0.1:8000
           - --no-redirects=false
-          - --redirection-url=https://pttg-fs-ui-{{.ENVIRONMENT}}.notprod.homeoffice.gov.uk
+          - --redirection-url=https://fs.{{.DNS_PREFIX}}pttg.homeoffice.gov.uk
           - --cors-origins='*'
           - --resource=uri=/healthz|white-listed=true
-          - --resource=uri=/INVALID|methods=GET|roles=pttg-user
+          - --resource=uri=/|methods=GET|roles=pttg-fs
           - --secure-cookie=true
           - --verbose
         imagePullPolicy: Always
@@ -135,8 +135,10 @@ spec:
       - name: pttg-fs-ui
         image: quay.io/ukhomeofficedigital/pttg-fs-ui:{{.VERSION}}
         env:
+          - name: ENV
+            value: "{{.ENVIRONMENT}}" 
           - name: API_ROOT
-            value: "https://pttg-fs-api.pt-i-{{.ENVIRONMENT}}.svc.cluster.local"
+            value: "http://pttg-fs-service:8080"
           - name: SERVER_PORT
             value: '8000'
           - name: JAVA_OPTS
