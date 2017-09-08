@@ -1,20 +1,16 @@
 #!/usr/bin/env bash
-export KUBE_NAMESPACE=${KUBE_NAMESPACE}
-export ENVIRONMENT=${ENVIRONMENT}
-export APP=pttg-fs-ui
-export KUBE_SERVER=${KUBE_SERVER_DEV}
-export KUBE_TOKEN=${KUBE_TOKEN}
+export WHITELIST=${WHITELIST:-0.0.0.0/0}
 
 if [ $ENVIRONMENT == "prod" ]
 then
+    export KUBE_TOKEN=${PROD_KUBE_TOKEN}
     export DNS_PREFIX=
 else
     export DNS_PREFIX=${ENVIRONMENT}.
 fi
 
 cd kd
-kd --debug \
-   --insecure-skip-tls-verify --timeout 5m0s \
-   --file deployment.yaml \
+kd --insecure-skip-tls-verify --timeout 5m0s \
    --file ingress.yaml \
-   --file service.yaml
+   --file service.yaml \
+   --file deployment.yaml
