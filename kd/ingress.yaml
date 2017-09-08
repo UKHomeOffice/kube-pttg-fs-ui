@@ -13,7 +13,7 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: pttg-ip-fm-ui
+          serviceName: pttg-fs-ui
           servicePort: 443
         path: /
   - host: pttg-fs-ui-{{.ENVIRONMENT}}.notprod.homeoffice.gov.uk
