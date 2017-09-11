@@ -6,7 +6,7 @@ then
     export KUBE_TOKEN=${PROD_KUBE_TOKEN}
     export DNS_PREFIX=
 else
-    export DNS_PREFIX=${ENVIRONMENT}.
+    export DNS_PREFIX=${ENVIRONMENT}.notprod.
 fi
 
 cd kd
