@@ -10,6 +10,11 @@ spec:
   selector:
     matchLabels:
       name: pttg-fs-ui
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 2
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -47,7 +52,14 @@ spec:
           - mountPath: /etc/nginx/secrets
             name: secrets
       - name: proxy
-        image: quay.io/ukhomeofficedigital/nginx-proxy:v1.1.5
+        image: quay.io/ukhomeofficedigital/pttg-nginx-proxy:v3.1.3a
+        resources:
+         limits:
+          memory: "100Mi"
+          cpu: 100m
+         requests:
+          memory: "50Mi"
+          cpu: 100m
         env:
           - name: PROXY_SERVICE_HOST
             value: '127.0.0.1'
@@ -69,14 +81,19 @@ spec:
             readOnly: true
         ports:
           - name: https
-            containerPort: 443
-          - name: http
-            containerPort: 80
+            containerPort: 10443
       - name: keycloak-proxy
         image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v1.2.7
+        resources:
+         limits:
+          memory: "100Mi"
+          cpu: 100m
+         requests:
+          memory: "50Mi"
+          cpu: 100m
         args:
           - --config=/etc/secrets/keycloak-api-secret.yaml
-          - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/pttg-qa
+          - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/{{.KC_REALM}}
           - --client-id=pttg-fs-{{.ENVIRONMENT}}
           - --listen=127.0.0.1:9000
           - --log-requests=true
@@ -88,6 +105,7 @@ spec:
           - --resource=uri=/healthz|white-listed=true
           - --resource=uri=/|methods=GET|roles=pttg-fs
           - --secure-cookie=true
+          - --http-only-cookie=true
           - --verbose
         imagePullPolicy: Always
         ports:
@@ -101,55 +119,20 @@ spec:
           limits:
             memory: 256Mi
             cpu: 100m
-      - name: vaultjks
-        image: quay.io/ukhomeofficedigital/vaultjks:v0.1.0
-        imagePullPolicy: Always
-        resources:
-          limits:
-            cpu: 100m
-            memory: "100Mi"
-          requests:
-            cpu: 100m
-            memory: "50Mi"
-        env:
-          - name: VAULT_ADDR
-            value: "https://vault.vault.svc.cluster.local:8200"
-          - name: VAULT_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: store-token
-                key: token
-          - name: VAULT_PKI_PATH
-            value: services/pt-i-{{.ENVIRONMENT}}/pki
-          - name: VAULT_ROLE_NAME
-            value: default
-          - name: SLEEP_FOREVER
-            value: "true"
-          - name: IP_SAN
-            valueFrom:
-              fieldRef:
-                fieldPath: status.podIP
-        volumeMounts:
-          - mountPath: /data
-            name: javapki
       - name: pttg-fs-ui
         image: quay.io/ukhomeofficedigital/pttg-fs-ui:{{.VERSION}}
         env:
-          - name: ENV
-            value: "{{.ENVIRONMENT}}" 
           - name: API_ROOT
-            value: "http://pttg-fs-service:8080"
-          - name: SERVER_PORT
-            value: '8000'
-          - name: JAVA_OPTS
-            value: "-Xms512m -Xmx768m"
+            value: "https://pttg-fs-service.pt-i-{{.ENVIRONMENT}}.svc.cluster.local"
+          - name: CA_CERTS_PATH
+            value: "/data/pttg-fs-ui-ca.pem"
         resources:
           limits:
-            cpu: 200m
-            memory: 2048Mi
+            cpu: 1000m
+            memory: 400Mi
           requests:
             cpu: 200m
-            memory: 1024Mi
+            memory: 100Mi
         ports:
           - name: http
             containerPort: 8000
@@ -160,7 +143,7 @@ spec:
             httpHeaders:
               - name: X-probe
                 value: kubelet
-          initialDelaySeconds: 180
+          initialDelaySeconds: 20
           periodSeconds: 20
           timeoutSeconds: 10
         readinessProbe:
@@ -170,19 +153,16 @@ spec:
               httpHeaders:
                 - name: X-probe
                   value: kubelet
-            initialDelaySeconds: 180
+            initialDelaySeconds: 20
             periodSeconds: 20
             timeoutSeconds: 10
         imagePullPolicy: Always
         volumeMounts:
           - mountPath: /data
-            name: javapki
+            name: secrets
             readOnly: true
       volumes:
       - name: secrets
-        emptyDir:
-          medium: "Memory"
-      - name: javapki
         emptyDir:
           medium: "Memory"
       - name: keycloak-api-secret

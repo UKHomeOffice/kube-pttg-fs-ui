@@ -5,8 +5,10 @@ if [ $ENVIRONMENT == "prod" ]
 then
     export KUBE_TOKEN=${PROD_KUBE_TOKEN}
     export DNS_PREFIX=
+    export KC_REALM=pttg-production
 else
     export DNS_PREFIX=${ENVIRONMENT}.notprod.
+    export KC_REALM=pttg-qa
 fi
 
 cd kd
