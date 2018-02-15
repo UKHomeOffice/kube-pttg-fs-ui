@@ -25,6 +25,8 @@ spec:
       - name: vault-sidekick
         image: quay.io/ukhomeofficedigital/vault-sidekick:v0.2.0
         imagePullPolicy: Always
+        securityContext:
+          runAsNonRoot: true
         resources:
          limits:
           memory: "100Mi"
@@ -53,6 +55,8 @@ spec:
             name: secrets
       - name: proxy
         image: quay.io/ukhomeofficedigital/pttg-nginx-proxy:v3.1.3a
+        securityContext:
+          runAsNonRoot: true
         resources:
          limits:
           memory: "100Mi"
@@ -84,6 +88,9 @@ spec:
             containerPort: 10443
       - name: keycloak-proxy
         image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v1.2.7
+        imagePullPolicy: Always
+        securityContext:
+          runAsNonRoot: true
         resources:
          limits:
           memory: "100Mi"
@@ -107,7 +114,6 @@ spec:
           - --secure-cookie=true
           - --http-only-cookie=true
           - --verbose
-        imagePullPolicy: Always
         ports:
           - name: keycloak-http
             containerPort: 9000
@@ -121,6 +127,9 @@ spec:
             cpu: 100m
       - name: pttg-fs-ui
         image: quay.io/ukhomeofficedigital/pttg-fs-ui:{{.VERSION}}
+        imagePullPolicy: Always
+        securityContext:
+          runAsNonRoot: true
         env:
           - name: API_ROOT
             value: "https://pttg-fs-service.pt-i-{{.ENVIRONMENT}}.svc.cluster.local"
@@ -156,7 +165,6 @@ spec:
             initialDelaySeconds: 20
             periodSeconds: 20
             timeoutSeconds: 10
-        imagePullPolicy: Always
         volumeMounts:
           - mountPath: /data
             name: secrets
