@@ -110,7 +110,7 @@ spec:
           - --redirection-url=https://fs.{{.DNS_PREFIX}}pttg.homeoffice.gov.uk
           - --cors-origins='*'
           - --resource=uri=/healthz|white-listed=true
-          - --resource=uri=/|methods=GET|roles=pttg-fs
+          - --resource=uri=/|methods=GET|roles=pttg-fs-{{.ENVIRONMENT}}
           - --secure-cookie=true
           - --http-only-cookie=true
           - --verbose
