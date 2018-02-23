@@ -3,13 +3,13 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: "nginx-external"
     ingress.kubernetes.io/secure-backends: "true"
     ingress.kubernetes.io/whitelist-source-range: "{{.WHITELIST}}"
   name: pttg-fs-ui
 spec:
   rules:
-  - host: fs.{{.DNS_PREFIX}}pttg.homeoffice.gov.uk
+  - host: fs.dev.notprod.pttg.homeoffice.gov.uk
     http:
       paths:
       - backend:
@@ -18,5 +18,5 @@ spec:
         path: /
   tls:
   - hosts:
-    - fs.{{.DNS_PREFIX}}pttg.homeoffice.gov.uk
+    - fs.dev.notprod.pttg.homeoffice.gov.uk
     secretName: letsencrypt-pttg-fs-ui
