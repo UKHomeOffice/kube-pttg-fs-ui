@@ -3,7 +3,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: "nginx-external"
     ingress.kubernetes.io/secure-backends: "true"
     ingress.kubernetes.io/whitelist-source-range: "{{.WHITELIST}}"
   name: pttg-fs-ui
