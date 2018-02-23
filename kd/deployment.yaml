@@ -174,12 +174,12 @@ spec:
             name: certs
             readOnly: true
       volumes:
-      - name: certs
-        emptyDir:
-          medium: "Memory"
-      - name: keycloak-api-secret
-        secret:
-          secretName: keycloak-api-secret
+        - name: certs
+          emptyDir:
+            medium: "Memory"
+        - name: keycloak-api-secret
+          secret:
+            secretName: keycloak-api-secret
         - name: bundle
           configMap:
             name: bundle
