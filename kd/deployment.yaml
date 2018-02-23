@@ -180,3 +180,6 @@ spec:
       - name: keycloak-api-secret
         secret:
           secretName: keycloak-api-secret
+        - name: bundle
+          configMap:
+            name: bundle
