@@ -90,7 +90,7 @@ spec:
         image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v1.2.7
         imagePullPolicy: Always
         securityContext:
-          runAsNonRoot: true
+          runAsNonRoot: false
         resources:
          limits:
           memory: "100Mi"
