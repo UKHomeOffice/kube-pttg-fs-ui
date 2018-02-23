@@ -1,4 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/bash
+export KUBE_NAMESPACE=${KUBE_NAMESPACE}
+export KUBE_SERVER=${KUBE_SERVER}
+export KUBE_TOKEN=${KUBE_TOKEN}
 export WHITELIST=${WHITELIST:-0.0.0.0/0}
 
 if [ $ENVIRONMENT == "prod" ]
@@ -12,7 +15,7 @@ else
 fi
 
 cd kd
-kd --insecure-skip-tls-verify --timeout 5m0s \
-   --file ingress.yaml \
-   --file service.yaml \
-   --file deployment.yaml
+kd --insecure-skip-tls-verify \
+   -f ingress.yaml \
+   -f deployment.yaml \
+   -f service.yaml
