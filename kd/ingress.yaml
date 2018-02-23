@@ -9,7 +9,7 @@ metadata:
   name: pttg-fs-ui
 spec:
   rules:
-  - host: fs.dev.notprod.pttg.homeoffice.gov.uk
+  - host: fs.{{.DNS_PREFIX}}pttg.homeoffice.gov.uk
     http:
       paths:
       - backend:
@@ -18,5 +18,5 @@ spec:
         path: /
   tls:
   - hosts:
-    - fs.dev.notprod.pttg.homeoffice.gov.uk
+    - fs.{{.DNS_PREFIX}}pttg.homeoffice.gov.uk
     secretName: letsencrypt-pttg-fs-ui
