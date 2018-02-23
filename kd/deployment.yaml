@@ -87,8 +87,9 @@ spec:
           - name: https
             containerPort: 10443
       - name: keycloak-proxy
-        image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v1.2.7
+        image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v2.1.1
         imagePullPolicy: Always
+          runAsNonRoot: true
         resources:
          limits:
           memory: "100Mi"
