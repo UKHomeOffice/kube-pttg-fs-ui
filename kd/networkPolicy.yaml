@@ -2,17 +2,14 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: ingress-network-policy
+  name: pttg-fs-ui
   namespace: {{.KUBE_NAMESPACE}}
 spec:
   podSelector:
     matchLabels:
-      role: artifactory
+      name: pttg-fs-ui
   ingress:
     - from:
-        - namespaceSelector:
-            matchLabels:
-              name: ingress-external
-      ports:
-        - protocol: TCP
-          port: 443
+      - namespaceSelector:
+          matchLabels:
+            name: ingress-external
