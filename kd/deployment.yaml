@@ -107,10 +107,10 @@ spec:
           - --enable-json-logging=true
           - --upstream-url=http://127.0.0.1:8000
           - --no-redirects=false
-          - --redirection-url=https://fs.{{.DNS_PREFIX}}pttg.homeoffice.gov.uk
+          - --redirection-url=https://fs.calc.{{.DNS_PREFIX}}pttg.homeoffice.gov.uk
           - --cors-origins='*'
           - --resources=uri=/healthz|white-listed=true
-          - --resources=uri=/|methods=GET|roles=pttg-fs-{{.ENVIRONMENT}}
+          - --resources=uri=/|methods=GET|roles=pttg-fs
           - --secure-cookie=true
           - --http-only-cookie=true
           - --verbose
@@ -138,7 +138,7 @@ spec:
           - name: API_ROOT
             value: "https://pttg-fs-service.pt-i-{{.ENVIRONMENT}}.svc.cluster.local"
           - name: CA_CERTS_PATH
-            value: "/certs/pttg-fs-ui-ca.pem"
+            value: "/certs/tls.pem"
         resources:
           limits:
             cpu: 1000m

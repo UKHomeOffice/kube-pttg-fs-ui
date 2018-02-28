@@ -9,14 +9,14 @@ metadata:
     ingress.kubernetes.io/secure-backends: "true"
     ingress.kubernetes.io/whitelist-source-range: "{{.WHITELIST}}"
     stable.k8s.psg.io/kcm.provider: http
-  name: pttg-fs-ui-ingress-external
+  name: pttg-fs-ui-calc-ingress-external
 spec:
   tls:
   - hosts:
-    - fs.{{.DNS_PREFIX}}pttg.homeoffice.gov.uk
-    secretName: letsencrypt-pttg-fs-ui
+    - fs.calc.{{.DNS_PREFIX}}pttg.homeoffice.gov.uk
+    secretName: letsencrypt-pttg-fs-ui-calc
   rules:
-  - host: fs.{{.DNS_PREFIX}}pttg.homeoffice.gov.uk
+  - host: fs.calc.{{.DNS_PREFIX}}pttg.homeoffice.gov.uk
     http:
       paths:
       - path: /

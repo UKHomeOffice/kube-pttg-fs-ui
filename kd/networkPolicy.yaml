@@ -5,11 +5,11 @@ metadata:
   name: pttg-fs-ui
   namespace: {{.KUBE_NAMESPACE}}
 spec:
-  podSelector:
-    matchLabels:
-      name: pttg-fs-ui
+  podSelector: {}
   ingress:
     - from:
       - namespaceSelector:
           matchLabels:
             name: ingress-external
+  egress:
+    - {}
