@@ -140,7 +140,10 @@ spec:
           - name: CA_CERTS_PATH
             value: "/certs/tls.pem"
           - name: PROXY_REDIRECTION_URL
-            value: "https://fs.calc.test.notprod.pttg.homeoffice.gov.uk"
+            valueFrom:
+              configMapKeyRef:
+                name: endpoint-config
+                key: PROXY_REDIRECTION_URL
         resources:
           limits:
             cpu: 1000m
