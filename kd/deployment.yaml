@@ -107,7 +107,7 @@ spec:
           - --enable-json-logging=true
           - --upstream-url=http://127.0.0.1:8000
           - --no-redirects=false
-          - --redirection-url=https://fs.calc.{{.DNS_PREFIX}}pttg.homeoffice.gov.uk
+          - --redirection-url={{.DOMAIN_NAME}}
           - --cors-origins='*'
           - --resources=uri=/healthz|white-listed=true
           - --resources=uri=/|methods=GET|roles=pttg-fs
@@ -140,10 +140,7 @@ spec:
           - name: CA_CERTS_PATH
             value: "/certs/tls.pem"
           - name: PROXY_REDIRECTION_URL
-            valueFrom:
-              configMapKeyRef:
-                name: endpoint-config
-                key: PROXY_REDIRECTION_URL
+            value: {{.DOMAIN_NAME}}
         resources:
           limits:
             cpu: 1000m

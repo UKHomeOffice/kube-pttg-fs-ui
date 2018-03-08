@@ -35,6 +35,10 @@ else
     export KC_REALM=pttg-qa
 fi
 
+export DOMAIN_NAME=https://fs.calc.${DNS_PREFIX}pttg.homeoffice.gov.uk
+
+echo "DOMAIN_NAME is $DOMAIN_NAME"
+
 cd kd
 
 kd --insecure-skip-tls-verify \

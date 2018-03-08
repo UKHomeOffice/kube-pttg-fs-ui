@@ -13,10 +13,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - fs.calc.{{.DNS_PREFIX}}pttg.homeoffice.gov.uk
+    - {{.DOMAIN_NAME}}
     secretName: letsencrypt-pttg-fs-ui-calc
   rules:
-  - host: fs.calc.{{.DNS_PREFIX}}pttg.homeoffice.gov.uk
+  - host: {{.DOMAIN_NAME}}
     http:
       paths:
       - backend:
