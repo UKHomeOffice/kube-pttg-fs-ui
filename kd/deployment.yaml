@@ -139,6 +139,8 @@ spec:
             value: "https://pttg-fs-service.pttg-fs-{{.ENVIRONMENT}}.svc.cluster.local"
           - name: CA_CERTS_PATH
             value: "/certs/tls.pem"
+          - name: PROXY_REDIRECTION_URL
+            value: "https://fs.calc.test.notprod.pttg.homeoffice.gov.uk"
         resources:
           limits:
             cpu: 1000m
