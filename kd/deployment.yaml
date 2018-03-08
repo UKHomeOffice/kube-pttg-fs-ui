@@ -107,7 +107,7 @@ spec:
           - --enable-json-logging=true
           - --upstream-url=http://127.0.0.1:8000
           - --no-redirects=false
-          - --redirection-url={{.DOMAIN_NAME}}
+          - --redirection-url=https://{{.DOMAIN_NAME}}
           - --cors-origins='*'
           - --resources=uri=/healthz|white-listed=true
           - --resources=uri=/|methods=GET|roles=pttg-fs
@@ -140,7 +140,7 @@ spec:
           - name: CA_CERTS_PATH
             value: "/certs/tls.pem"
           - name: PROXY_REDIRECTION_URL
-            value: {{.DOMAIN_NAME}}
+            value: https://{{.DOMAIN_NAME}}
         resources:
           limits:
             cpu: 1000m
