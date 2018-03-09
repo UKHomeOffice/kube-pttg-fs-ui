@@ -7,9 +7,9 @@ if [[ -z ${VERSION} ]] ; then
     export VERSION=${IMAGE_VERSION}
 fi
 
-if [[ ${ENVIRONMENT} == "prod" ]] ; then
-    echo "deploy ${VERSION} to prod namespace, using PTTG_FS_PROD drone secret"
-    export KUBE_TOKEN=${PTTG_FS_PROD}
+if [[ ${ENVIRONMENT} == "pr" ]] ; then
+    echo "deploy ${VERSION} to pr namespace, using PTTG_FS_PR drone secret"
+    export KUBE_TOKEN=${PTTG_FS_PR}
 else
     if [[ ${ENVIRONMENT} == "test" ]] ; then
         echo "deploy ${VERSION} to test namespace, using PTTG_FS_TEST drone secret"
@@ -27,7 +27,7 @@ fi
 
 export WHITELIST=${WHITELIST:-0.0.0.0/0}
 
-if [ "${ENVIRONMENT}" == "prod" ] ; then
+if [ "${ENVIRONMENT}" == "pr" ] ; then
     export DNS_PREFIX=
     export KC_REALM=pttg-production
 else
