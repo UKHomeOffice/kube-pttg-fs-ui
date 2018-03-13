@@ -9,12 +9,12 @@ metadata:
     ingress.kubernetes.io/secure-backends: "true"
     ingress.kubernetes.io/whitelist-source-range: "{{.WHITELIST}}"
     stable.k8s.psg.io/kcm.provider: http
-  name: pttg-fs-ui-calc-ingress-external
+  name: pttg-fs-ui-ingress-external
 spec:
   tls:
   - hosts:
     - {{.DOMAIN_NAME}}
-    secretName: letsencrypt-pttg-fs-ui-calc
+    secretName: letsencrypt-pttg-fs-ui
   rules:
   - host: {{.DOMAIN_NAME}}
     http:

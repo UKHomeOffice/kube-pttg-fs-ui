@@ -36,7 +36,7 @@ else
     export KC_REALM=pttg-qa
 fi
 
-export DOMAIN_NAME=fs.calc.${DNS_PREFIX}pttg.homeoffice.gov.uk
+export DOMAIN_NAME=fs.${DNS_PREFIX}pttg.homeoffice.gov.uk
 
 echo "DOMAIN_NAME is $DOMAIN_NAME"
 
