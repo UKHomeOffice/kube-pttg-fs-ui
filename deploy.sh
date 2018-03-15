@@ -25,8 +25,7 @@ if [[ -z ${KUBE_TOKEN} ]] ; then
     exit -1
 fi
 
-#export WHITELIST=${WHITELIST:-0.0.0.0/0}
-export WHITELIST=0.0.0.0/0
+export WHITELIST=${WHITELIST:-0.0.0.0/0}
 
 if [ "${ENVIRONMENT}" == "pr" ] ; then
     export DNS_PREFIX=
