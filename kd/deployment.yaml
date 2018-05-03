@@ -66,7 +66,7 @@ spec:
           - name: PROXY_SERVICE_HOST
             value: '127.0.0.1'
           - name: PROXY_SERVICE_PORT
-            value: '8000'
+            value: '9000'
           - name: NAXSI_USE_DEFAULT_RULES
             value: 'FALSE'
           - name: ENABLE_UUID_PARAM
