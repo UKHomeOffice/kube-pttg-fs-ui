@@ -5,3 +5,4 @@ kubectl
 kd_linux_amd64
 *.iml
 .DS_Store
+.gradle/

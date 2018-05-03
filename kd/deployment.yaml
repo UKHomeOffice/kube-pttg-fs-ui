@@ -78,7 +78,7 @@ spec:
           - name: SERVER_KEY
             value: /certs/tls-key.pem
           - name: ADD_NGINX_SERVER_CFG
-            value: 'gzip off; location = /reload { allow 127.0.0.1; deny all; content_by_lua_block { os.execute("touch /tmp/nginx-reload-triggered; /usr/local/openresty/nginx/sbin/nginx -s reload; touch /tmp/nginx-reload-complete;") } }'
+            value: 'proxy_read_timeout 900; gzip off; location = /reload { allow 127.0.0.1; deny all; content_by_lua_block { os.execute("touch /tmp/nginx-reload-triggered; /usr/local/openresty/nginx/sbin/nginx -s reload; touch /tmp/nginx-reload-complete;") } }'
         volumeMounts:
           - name: certs
             mountPath: /certs
@@ -106,7 +106,8 @@ spec:
           - --enable-logging=true
           - --enable-json-logging=true
           - --upstream-url=http://127.0.0.1:8000
-          - --upstream-response-header-timeout=50s
+          - --upstream-response-header-timeout=60s
+          - --upstream-keepalive-timeout=60s
           - --no-redirects=false
           - --redirection-url=https://{{.DOMAIN_NAME}}
           - --cors-origins='*'
