@@ -25,7 +25,7 @@ if [[ -z ${KUBE_TOKEN} ]] ; then
     exit -1
 fi
 
-export WHITELIST=0.0.0.0/0
+export WHITELIST=${WHITELIST:-0.0.0.0/0}
 
 if [ "${ENVIRONMENT}" == "pr" ] ; then
     export DNS_PREFIX=
@@ -37,7 +37,12 @@ fi
 
 export DOMAIN_NAME=fs.${DNS_PREFIX}pttg.homeoffice.gov.uk
 
-echo "DOMAIN_NAME is $DOMAIN_NAME"
+echo
+echo "Deploying pttg-fs-ui to ${ENVIRONMENT}"
+echo "whitelist: ${WHITELIST}"
+echo "Keycloak realm: ${KC_REALM}"
+echo "domain name: ${DOMAIN_NAME}"
+echo
 
 cd kd
 
