@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: certs
-        image: quay.io/ukhomeofficedigital/pttg-cfssl-sidekick:build-6
+        image: quay.io/ukhomeofficedigital/cfssl-sidekick:v0.1.0
         securityContext:
           runAsNonRoot: true
           capabilities:
@@ -33,7 +33,7 @@ spec:
         args:
           - --certs=/certs
           - --domain=pttg-fs-ui.${KUBE_NAMESPACE}.svc.cluster.local
-          - --expiry=8760h
+          - --expiry=5m
           - --command=/usr/local/scripts/trigger_nginx_reload.sh
         env:
           - name: KUBE_NAMESPACE
