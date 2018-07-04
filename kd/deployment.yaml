@@ -150,6 +150,9 @@ spec:
             value: https://{{.DOMAIN_NAME}}
           - name: PROXY_DISCOVERY_URL
             value: https://sso.digital.homeoffice.gov.uk/auth/realms/{{.KC_REALM}}
+        envFrom:
+          - configMapRef:
+              name: fs-timeout-config
         resources:
           limits:
             cpu: 1000m
